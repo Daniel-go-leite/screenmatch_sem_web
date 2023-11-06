@@ -1,5 +1,6 @@
 package br.com.daniel.screenmatch_serie;
 
+import br.com.daniel.screenmatch_serie.model.DadosEpisodio;
 import br.com.daniel.screenmatch_serie.model.DadosSerie;
 import br.com.daniel.screenmatch_serie.service.ConsumoApi;
 import br.com.daniel.screenmatch_serie.service.ConverteDados;
@@ -22,5 +23,8 @@ public class ScreenmatchSerieApplication implements CommandLineRunner {
 		ConverteDados conversor = new ConverteDados();
 		DadosSerie dados = conversor.obeterDados(json,DadosSerie.class);
 		System.out.println(dados);
+		json = consumoApi.obterDados("https://omdbapi.com/?t=gilmoegirls&season=1&episode=2apikey=6585022c");
+		DadosEpisodio dadosEpisodio = conversor.obeterDados(json, DadosEpisodio.class);
+		System.out.println(dadosEpisodio);
 	}
 }
