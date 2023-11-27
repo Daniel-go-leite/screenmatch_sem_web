@@ -1,18 +1,28 @@
 package br.com.daniel.screenmatch_serie.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
+@Entity
+@Table(name = "episodios")
 public class Episodio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Integer temporada;
     private String titulo;
     private Integer NumeroDeEpisodio;
     private Double avaliacao;
     private LocalDate dataLancamento;
 
+    @ManyToOne
+    private Serie serie;
 
+    public Episodio(){
 
+    }
 
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio ){
         this.temporada = numeroTemporada;
@@ -35,12 +45,13 @@ public class Episodio {
 
     }
 
+
     public Integer getTemporada() {
         return temporada;
     }
 
-    public void setTemporada(Integer temporada) {
-        this.temporada = temporada;
+    public void setTemporada(Integer temporada){
+            this.temporada = temporada;
     }
 
     public String getTitulo() {
@@ -71,9 +82,34 @@ public class Episodio {
         return dataLancamento;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(LocalDate dataLancamento) {
+        this.dataLancamento = dataLancamento;
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
+
     public void setDataDelancamento(LocalDate dataDelancamento) {
         this.dataLancamento = dataDelancamento;
     }
+
 
     @Override
     public String toString() {
@@ -85,4 +121,5 @@ public class Episodio {
                 ", dataDelancamento=" + dataLancamento +
                 '}';
     }
+
 }
